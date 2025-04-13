@@ -22,6 +22,8 @@ router.post(
 );
 
 router.get('/', authenticate, employeeController.getAllEmployees);
+router.get('/count', authenticate, employeeController.getAllEmployeesCount);
+router.get('/newHires', authenticate, employeeController.getNewHires);
 
 router.get(
   '/:id',

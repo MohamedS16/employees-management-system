@@ -9,11 +9,6 @@ router.post('/login', authController.login);
 
 router.post('/logout', authController.logout);
 
-router.get('/profile', authenticate, (req, res) => {
-  res.status(200).json({
-    message: 'Protected profile',
-    user: req.user
-  });
-});
+router.get('/me', authenticate, authController.me);
 
 module.exports = router;

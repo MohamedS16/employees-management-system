@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { Employee, Department } = require('../models');
 const { successResponse, errorResponse } = require('../utils/response');
 
@@ -39,7 +40,38 @@ const createEmployee = async (req, res) => {
 
 const getAllEmployees = async (req, res) => {
   try {
-    const employees = await Employee.findAll();
+    const employees = await Employee.findAll({
+      include: [{
+        model: Department,
+        as: 'department',
+        required: false,
+      }]
+    });
+    return successResponse(res, employees, 'Employees retrieved successfully');
+  } catch (error) {
+    return errorResponse(res, 'Error retrieving employees', 500, error.message);
+  }
+};
+const getAllEmployeesCount = async (req, res) => {
+  try {
+    const count = await Employee.count();
+    return successResponse(res, count, 'Employees retrieved successfully');
+  } catch (error) {
+    return errorResponse(res, 'Error retrieving employees', 500, error.message);
+  }
+};
+const getNewHires = async (req, res) => {
+  try {
+    const employees = await Employee.findAll({
+      include: [{
+        model: Department,
+        as: 'department', 
+        required: false,
+      }],
+      order: [['createdAt', 'DESC']],
+      limit: 3,
+      
+    });
     return successResponse(res, employees, 'Employees retrieved successfully');
   } catch (error) {
     return errorResponse(res, 'Error retrieving employees', 500, error.message);
@@ -118,4 +150,6 @@ module.exports = {
   getEmployeeById,
   updateEmployee,
   deleteEmployee,
+  getAllEmployeesCount,
+  getNewHires
 };

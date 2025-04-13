@@ -1,0 +1,40 @@
+.container {
+    text-align: center;
+    padding: 5rem 2rem;
+    background-color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  }
+  
+  .code {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #0d1b4c;
+    margin-bottom: 1rem;
+  }
+  
+  .message {
+    font-size: 1.3rem;
+    color: #444;
+    margin-bottom: 2rem;
+  }
+  
+  .homeLink {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #0d1b4c;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .homeLink:hover {
+    background-color: #0a163b;
+  }
+  

@@ -1,10 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
-const dotenv = require('dotenv');
 const { successResponse, errorResponse } = require('../utils/response');
-
-dotenv.config();
 
 const register = async (req, res) => {
   const { username, password, role } = req.body;
@@ -75,4 +72,15 @@ const logout = (req, res) => {
   return successResponse(res, null, 'Logout successful');
 };
 
-module.exports = { register, login, logout };
+const me = async (req,res)=>{
+
+  try {
+    return successResponse(res,req.user,'Welcome');
+  } catch (error) {
+    console.error(error);
+    return errorResponse(res, 'Error logging in user', 500, error.message);
+
+  }
+}
+
+module.exports = { register, login, logout, me };
